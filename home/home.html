@@ -1,0 +1,32 @@
+<div class="home-bg">
+    <div class="container home-form">
+        <form name="quoteForm" novalidate class="row col-sm-10 col-sm-offset-1 form-div">
+            <div class="col-sm-5">
+                <input ng-model="country.departure" class="form-control" name="departure" type="text" placeholder="Country of departure">
+            </div>
+            <div class="col-sm-5">
+                <input ng-model="country.destination" class="form-control" name="departure" type="text" placeholder="Country of destination">
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-primary form-control" ng-click="info(country)">Get Quote</button>
+            </div>
+        </form>
+    </div>
+    <div class="container home-form prices">
+        <div name="quote" novalidate class="row col-sm-4 col-sm-offset-4 avg-price">
+            Average Price
+            <p>{{display | currency}}</p>
+        </div>
+    </div>
+    <div class="container home-form prices">
+        <div name="quote" novalidate class="row col-sm-4 col-sm-offset-4 avg-price">
+            Minimum Price
+            <p>{{min | currency}}</p>
+        </div>
+    </div>
+    <div class="container  text-center carrier">
+       <p>List of Carriers</p>
+        <p ng-repeat="carrier in carriers"><a href="#">{{carrier}}</a></p>
+    </div>
+</div>
+<!--End of home-bg-->
