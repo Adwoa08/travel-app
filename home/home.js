@@ -1,12 +1,12 @@
+
 var app = angular.module("personalSite");
 
 app.controller("homeCtrl", ["$scope", "httpServiceCall", function ($scope, httpServiceCall) {
-
+  
     $scope.carriers = [];
 
     $scope.info = function (country) {
         $scope.min = "";
-//        console.log(country);
         httpServiceCall.getQuotes(country).then(function (data) {
             console.log(data);
             $scope.display = 0;
@@ -46,6 +46,6 @@ app.controller("homeCtrl", ["$scope", "httpServiceCall", function ($scope, httpS
         //        
     }
 
-
+// http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey=vs428264159776212343779819234691
 
 }])
