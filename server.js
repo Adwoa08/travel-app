@@ -11,16 +11,21 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 
-app.get("/flights", function (req, res){
-  
- request("http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/usd/en-US/" + departure + "/" + destination + "/anytime/anytime?apikey=" + config.key, function (err, response, body){
-   if (err) throw err;
-   res.send(body);
- });
+app.post("/flights", function (req, res) {
+    var departure = req.body.departure;
+    var destination = req.body.destination;
+    var departDate = req.body.departDate;
+    var returnDate = req.body.returnDate;
+    
+    var anytime = "anytime";
+   request("http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/usd/en-US/" + departure + "/" + destination + "/" + anytime +"/" + anytime + "?apikey=" + config.key, function (err, response, body){
+       if (err) throw err;
+       res.send(body);
+     });
 })
 
 
 
-app.listen(port, function(){
+app.listen(port, function () {
     console.log("Server is listening on port " + port);
 })

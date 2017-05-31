@@ -3,13 +3,55 @@ var app = angular.module("personalSite");
 app.controller("homeCtrl", ["$scope", "httpServiceCall", function ($scope, httpServiceCall) {
 
 
-//    $scope.country = {
-//        value: "roundtrip"
-//    }
+    $scope.radio = {
+        value: "roundtrip"
+    }
 
     $scope.carriers = [];
 
+
     $scope.info = function (country) {
+
+        if (country.departDate) {
+            var dd = country.departDate.getDate();
+            var mm = country.departDate.getMonth() + 1;
+            var yyyy = country.departDate.getFullYear();
+        }
+
+        if (country.returnDate) {
+            var dd2 = country.returnDate.getDate();
+            var mm2 = country.returnDate.getMonth() + 1;
+            var yyyy2 = country.returnDate.getFullYear();
+
+            if (dd2 < 10) {
+                dd2 = '0' + dd2;
+            }
+
+            if (mm2 < 10) {
+                mm2 = '0' + mm2;
+            }
+
+            country.returnDate = yyyy2 + '-' + mm2 + '-' + dd2;
+        }
+
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        if (country.departDate) {
+            country.departDate = yyyy + '-' + mm + '-' + dd;
+        }
+
+        if (country.returnDate === undefined || country.returnDate === "") {
+            country.returnDate = "";
+        }
+
+
         $scope.min = "";
         httpServiceCall.getQuotes(country).then(function (data) {
             $scope.display = 0;
@@ -28,38 +70,12 @@ app.controller("homeCtrl", ["$scope", "httpServiceCall", function ($scope, httpS
 
             for (var j = 0; j < data.Carriers.length; j++) {
                 $scope.carriers.push(data.Carriers[j].Name);
-//                console.log(data.Carriers[j]);
             }
 
-//            $scope.country.departure = '';
-//            $scope.country.destination = '';
         });
 
-        //        httpServiceCall.getQuotes(country).then(function(quotes){
-        //             $scope.display = 0;
-        //
-        //            for(var i = 0; i < quotes.Quotes.length; i++){
-        //                $scope.display += quotes.Quotes[i].MinPrice;
-        //            }
-        //            $scope.display /= quotes.Quotes.length;
-        //        });
-        //        
+        $scope.country = {};
     }
 
-// http://partners.api.skyscanner.net/apiservices/geo/v1.0?apikey=vs428264159776212343779819234691
 
-}])
-
-
-//app.filter('dateFormat', function ($filter) {
-//    return function (input) {
-//        if (input == null) {
-//            return "";
-//        }
-//
-//        var _date = $filter('date')(new Date(input), 'MMM dd yyyy');
-//
-//        return _date.toUpperCase();
-//
-//    };
-//});
+}]);

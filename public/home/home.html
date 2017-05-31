@@ -1,17 +1,17 @@
 <div class="home-bg">
     <div class="container home-form">
+
         <form name="quoteForm" novalidate class="form-div">
-<!--
             <div class="row trip">
                 <label class="col-sm-2" id="roundtrip">
-                    <input ng-model="country.value" name="roundtrip" type="radio" value="roundtrip"> Roundtrip
+                    <input ng-model="radio.value" name="trip" type="radio" value="roundtrip" ng-change="country.departDate = country.departDate ? ng-disabled='!oneway.check' : country.returnDate"> Roundtrip
                 </label>
                 <label class="col-sm-2" id="oneway">
-                    <input ng-model="oneway" name="oneway" type="radio" value="oneway"> One way
+                    <input ng-model="oneway.check" name="trip" type="radio" value="oneway" ng-change="country.returnDate = oneway.check ? 'oneway' : country.returnDate"> One way
                 </label>
             </div>
--->
             <div class="clear"></div>
+
             <div class="row">
                 <div class="col-sm-3">
                     <input ng-model="country.departure" class="form-control" name="departure" type="text" placeholder="Country of departure">
@@ -19,14 +19,12 @@
                 <div class="col-sm-3">
                     <input ng-model="country.destination" class="form-control" name="departure" type="text" placeholder="Country of destination">
                 </div>
-<!--
                 <div class="col-sm-3">
-                    <input ng-model="country.departDate" class="form-control" name="departDate" type="date" placeholder="departure date">
+                    <input ng-model="country.departDate" class="form-control" name="departDate" type="date">
                 </div>
                 <div class="col-sm-3">
-                    <input ng-model="country.returnDate" class="form-control" name="returnDate" type="date" placeholder="return date">
+                    <input ng-model="country.returnDate" class="form-control" name="returnDate" type="date" ng-disabled="oneway.check">
                 </div>
--->
             </div>
 
             <div class="row btn-row-div">
@@ -39,36 +37,6 @@
 
     <div class="clear"></div>
 
-    <!--
-    <div class="container">
-        <div class="row prices-carrier-div">
-            <div class="col-xs-10 col-xs-offset-1 col-sm-6">
-                <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1 home-form prices">
-                        <div name="quote" class="avg-price">
-                            Average Price
-                            <p>{{display | currency}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1 home-form prices">
-                        <div name="quote" class="avg-price">
-                            Minimum Price
-                            <p>{{min | currency}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-10 col-xs-offset-1 col-sm-6">
-                <div class="text-center carrier">
-                    <p>List of Carriers</p>
-                    <p ng-repeat="carrier in carriers"><a href="#">{{carrier}}</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
--->
     <div class="container">
 
         <section ng-init="tab = 1" class="tab tab-section" ng-if="display">
@@ -81,8 +49,7 @@
                 </li>
 
             </ul>
-
-            <!--ng-if="display"-->
+            
             <div ng-show="tab === 1">
                 <div class="home-form">
                     <div class="col-xs-5 home-form prices">
@@ -98,12 +65,9 @@
                             Minimum Price
                             <p>{{min | currency}}</p>
                         </div>
-<!--                        <p ng-repeat="carrier in carriers"><a href="#">{{carrier}}</a></p>-->
                     </div>
                 </div>
             </div>
-
-            <!--                <div class="clear"></div>-->
 
             <div ng-show="tab === 2">
 
@@ -114,12 +78,7 @@
                     </div>
                 </div>
             </div>
-
         </section>
-       
-
-
-
 
     </div>
     <!--End of home-bg-->

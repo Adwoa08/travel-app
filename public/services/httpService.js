@@ -74287,7 +74287,6 @@ app.service("httpServiceCall", ["$http", function ($http) {
                         return locationDetail.Continents[i].Countries[j].Cities[k].Id;
                     }
                 }
-
             }
         }
 
@@ -74297,40 +74296,19 @@ app.service("httpServiceCall", ["$http", function ($http) {
 
 
     this.getQuotes = function (country, city) {
-        console.log(city);
         var departure = country.departure;
         var destination = country.destination;
 
         departure = normalizeLocation(departure);
         destination = normalizeLocation(destination);
 
-        city = {};
-        city.departure = departure;
-        city.destination = destination;
-        console.log(city);
+        
+        country.departure = departure;
+        country.destination = destination;
 
-
-        //
-        //        return $http.get("/flights?" + "departure=" + city.departure + "&&destination=" + city.destination).then(function(response){
-        //                console.log(response.data);
-        //                return response;
-        //        })
-        //       
-
-        //        var key = "vs428264159776212343779819234691";
-        //        return $http.get("http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/usd/en-US/" + departure + "/" + destination + "/" + country.departDate + "/" + country.returnDate + "?apikey=" + key)
-        //            .then(function (response) {
-        //            console.log(response.data);
-        //                return response.data;
-        //            });
-
-        var key = "vs428264159776212343779819234691";
-        return $http.get("http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/usd/en-US/" + departure + "/" + destination + "/anytime/anytime?apikey=" + key)
-            .then(function (response) {
-                console.log(response.data);
-                return response.data;
-            });
-
+        return $http.post("/flights", country).then(function(response){
+           return response.data;
+        })
 
     }
 
