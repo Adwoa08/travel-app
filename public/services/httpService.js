@@ -74305,6 +74305,8 @@ app.service("httpServiceCall", ["$http", function ($http) {
         
         country.departure = departure;
         country.destination = destination;
+        
+        console.log(country);
 
         return $http.post("/flights", country).then(function(response){
            return response.data;
