@@ -4,7 +4,7 @@
         <form name="quoteForm" novalidate class="form-div">
             <div class="row trip">
                 <label class="col-sm-2" id="roundtrip">
-                    <input ng-model="radio.value" name="trip" type="radio" value="roundtrip" ng-change="country.departDate = country.departDate ? ng-disabled='!oneway.check' : country.returnDate"> Roundtrip
+                    <input ng-model="radio.value" name="trip" type="radio" value="roundtrip" ng-change="country.returnDate = 'oneway' ? country.returnDate : country.returnDate"> Roundtrip
                 </label>
                 <label class="col-sm-2" id="oneway">
                     <input ng-model="oneway.check" name="trip" type="radio" value="oneway" ng-change="country.returnDate = oneway.check ? 'oneway' : country.returnDate"> One way
@@ -49,21 +49,20 @@
                 </li>
 
             </ul>
-            
+
             <div ng-show="tab === 1">
                 <div class="home-form">
-                    <div class="col-xs-5 home-form prices">
-                        <div name="quote" class="avg-price">
-                            Average Price
-                            <p>{{display | currency}}</p>
-                        </div>
-                    </div>
-
-
                     <div class="col-xs-5 col-xs-offset-2 home-form prices">
                         <div name="quote" class="avg-price">
                             Minimum Price
                             <p>{{min | currency}}</p>
+                        </div>
+                    </div>
+                   
+                    <div class="col-xs-5 home-form prices">
+                        <div name="quote" class="avg-price">
+                            Average Price
+                            <p>{{display | currency}}</p>
                         </div>
                     </div>
                 </div>

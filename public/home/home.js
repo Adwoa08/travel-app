@@ -10,6 +10,7 @@ app.controller("homeCtrl", ["$scope", "httpServiceCall", function ($scope, httpS
     $scope.carriers = [];
 
 
+    //convert date to api string format
     $scope.info = function (country) {
 
         if (country.departDate) {
@@ -34,7 +35,7 @@ app.controller("homeCtrl", ["$scope", "httpServiceCall", function ($scope, httpS
             country.returnDate = yyyy2 + '-' + mm2 + '-' + dd2;
         }
 
-
+        
         if (dd < 10) {
             dd = '0' + dd;
         }
@@ -51,9 +52,9 @@ app.controller("homeCtrl", ["$scope", "httpServiceCall", function ($scope, httpS
             country.returnDate = "";
         }
 
-
+        //api call for quotes
         $scope.min = "";
-        httpServiceCall.getQuotes(country).then(function (data) {
+        return httpServiceCall.getQuotes(country).then(function (data) {
             $scope.display = 0;
             if (data.Quotes.length > 0) {
                 $scope.min = data.Quotes[0].MinPrice;
